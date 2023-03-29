@@ -9,15 +9,15 @@ var createError = require("http-errors");
 var cookieParser = require("cookie-parser");
 var swaggerAutogen = require("swagger-autogen")();
 
-
 const jsonResponse = require("./utils/jsonResponse");
 var defineRoute = require("./routes/index");
 const outputFile = "./utils/swagger_output.json";
-const endpointsFiles = ["./routes/index.js"];
+const endpointsFiles = ["./routes/api.js"];
 const corsOptions = { origin: "*", optionsSuccessStatus: 200 };
+const queueUtils = require("./services/rabbitMq/queueUtils");
 
 var app = express();
-// connect();
+connect();
 app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(express.json());

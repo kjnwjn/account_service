@@ -11,19 +11,21 @@ const authorization = {
                 if (error) {
                     return next(error);
                 }
-                if (payload && payload.role.toUpperCase() == admin.userCode) {
-                    return next();
-                } else {
-                    return jsonResponse({ req, res }).status(401).json({
-                        message: "Permission denied! Only admin is allowed to access this enpoint!",
+                if (payload) {
+                    const isCorrect = role.admin.filter((item) => {
+                        return item === payload.role.toUpperCase();
                     });
+                    if (isCorrect.length > 0) return next();
                 }
+                return jsonResponse({ req, res }).status(401).json({
+                    message: "Permission denied! Only admin is allowed to access this enpoint!",
+                });
             });
         } catch (error) {
             return next(error);
         }
     },
-    otherAuthor: async (req, res, next) => {
+    managerGr: async (req, res, next) => {
         try {
             const token = req.query.token || req.headers["x-access-token"] || null;
             jwt.verify(token, process.env.SECRET_KEY, async (error, payload) => {
@@ -31,18 +33,36 @@ const authorization = {
                     return next(error);
                 }
                 if (payload) {
-                    const valueRole = Object.values(role).shift();
-                    const isCorrect = valueRole.filter((val) => {
-                        if (payload.role.toUpperCase() == val) return true;
+                    const isCorrect = role.managerGr.filter((item) => {
+                        return item === payload.role.toUpperCase();
                     });
-                    if (isCorrect) {
-                        return next();
-                    } else {
-                        return jsonResponse({ req, res }).status(401).json({
-                            message: "Permission denied! Only admin is allowed to access this enpoint!",
-                        });
-                    }
+                    if (isCorrect.length > 0) return next();
                 }
+                return jsonResponse({ req, res }).status(401).json({
+                    message: "Permission denied!",
+                });
+            });
+        } catch (error) {
+            return next(error);
+        }
+    },
+
+    customerGr: async (req, res, next) => {
+        try {
+            const token = req.query.token || req.headers["x-access-token"] || null;
+            jwt.verify(token, process.env.SECRET_KEY, async (error, payload) => {
+                if (error) {
+                    return next(error);
+                }
+                if (payload) {
+                    const isCorrect = role.customerGr.filter((item) => {
+                        return item === payload.role.toUpperCase();
+                    });
+                    if (isCorrect.length > 0) return next();
+                }
+                return jsonResponse({ req, res }).status(401).json({
+                    message: "Permission denied!",
+                });
             });
         } catch (error) {
             return next(error);

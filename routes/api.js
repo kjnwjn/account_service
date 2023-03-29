@@ -1,7 +1,7 @@
 const Router = require("express").Router();
 // const authentication = require("../middleware/authentication");
 
-// const { login, logout } = require("./modules/account");
+const { login } = require("./modules/account");
 // const { login, logout, newAccount, getAllAccount, refreshToken } = require("./modules/account");
 // const { generateToken, getAccessToken } = require("./modules/test");
 // const { newOrder, removeOrder, addToCart, payOrder } = require("./modules/order");
@@ -15,9 +15,7 @@ const Router = require("express").Router();
  * Account ================================================================
  */
 
-Router.post("/account/login", (req,res,next) =>{
-    res.send("hello")
-});
+Router.post("/account/login", login);
 // Router.get("/account/logout", authentication, logout);
 // Router.get("/account/refresh-token", refreshToken);
 
