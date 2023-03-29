@@ -3,7 +3,7 @@ const purePassword = process.env.ADMIN_PASSWORD || "123456";
 const hashPassword = bcrypt.hashSync(purePassword, bcrypt.genSaltSync(10));
 
 module.exports = {
-    id_student: "ADMIN",
+    username: "ADMIN",
     password: hashPassword,
     // role: "ADMIN",
 };

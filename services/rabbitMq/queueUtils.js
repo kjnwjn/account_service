@@ -18,7 +18,8 @@ class queuesUtil {
         exchangeType = EXCHANGE_TYPE,
         bindingKey = "",
         exchangeOptions = amqplib.Options.AssertExchange,
-        consumeOptions = amqplib.Options.Consume
+        consumeOptions = amqplib.Options.Consume,
+        callback = () => {}
     ) {
         return new Promise(async (resolve, reject) => {
             try {
@@ -31,14 +32,14 @@ class queuesUtil {
                     assertQueue.queue,
                     async (consumeMessage) => {
                         if (consumeMessage) {
-                            return JSON.parse(consumeMessage.content);
+                            callback(consumeMessage.content ? JSON.parse(consumeMessage.content.toString()) : {});
                         } else {
-                            return false;
+                            reject(false);
                         }
                     },
                     consumeOptions
                 );
-                resolve(data);
+                resolve();
             } catch (error) {
                 reject(error);
             }

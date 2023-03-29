@@ -24,7 +24,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "id_student": {
+                "username": {
                   "example": "any"
                 },
                 "password": {
@@ -34,6 +34,16 @@
             }
           }
         ],
+        "responses": {}
+      }
+    },
+    "/account/refresh-token": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "description": "",
+        "parameters": [],
         "responses": {}
       }
     }

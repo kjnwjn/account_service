@@ -7,7 +7,7 @@ const adminConfig = require("./admin");
 
 var connection = mongoose.createConnection(database_uri);
 // autoIncrement.initialize(connection);
-const query = { id_student: adminConfig.id_student },
+const query = { username: adminConfig.username },
     update = adminConfig,
     options = { upsert: true, new: true, setDefaultsOnInsert: true };
 

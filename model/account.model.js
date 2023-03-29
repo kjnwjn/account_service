@@ -3,7 +3,7 @@ const mongooseDelete = require("mongoose-delete");
 
 const accountSchema = new mongoose.Schema(
     {
-        id_student: {
+        username: {
             type: String,
             require: true,
             unique: true,
