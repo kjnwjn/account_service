@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/account/login": {
+    "/account/user-login": {
       "post": {
         "tags": [
           "Account"
@@ -28,6 +28,90 @@
                   "example": "any"
                 },
                 "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/account/student-login": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "description": "This endpoint provides method for logging in system. Then receive an access token.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/account/new-account": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "description": "This endpoint provides method for logging in system. Then receive an access token.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "example": "any"
+                },
+                "username": {
+                  "example": "any"
+                },
+                "role": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/account/change-pass": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "any"
+                },
+                "oldPassword": {
+                  "example": "any"
+                },
+                "newPassword": {
                   "example": "any"
                 }
               }

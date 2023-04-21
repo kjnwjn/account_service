@@ -14,7 +14,7 @@ var defineRoute = require("./routes/index");
 const outputFile = "./utils/swagger_output.json";
 const endpointsFiles = ["./routes/api.js"];
 const corsOptions = { origin: "*", optionsSuccessStatus: 200 };
-const defineReceiver = require("./services/rabbitMq/receive");
+// const defineReceiver = require("./services/rabbitMq/receive");
 
 var app = express();
 connect();
@@ -37,7 +37,7 @@ const doc = {
 swaggerAutogen(outputFile, endpointsFiles, doc);
 
 defineRoute(app);
-defineReceiver.init();
+// defineReceiver.init();
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -5,5 +5,4 @@ const hashPassword = bcrypt.hashSync(purePassword, bcrypt.genSaltSync(10));
 module.exports = {
     username: "ADMIN",
     password: hashPassword,
-    // role: "ADMIN",
 };

@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const role = require("../configs/role");
-const admin = require("../configs/admin");
 const jsonResponse = require("../utils/jsonResponse");
 const authorization = {
     admin: async (req, res, next) => {
@@ -47,7 +46,7 @@ const authorization = {
         }
     },
 
-    customerGr: async (req, res, next) => {
+    studentGr: async (req, res, next) => {
         try {
             const token = req.query.token || req.headers["x-access-token"] || null;
             jwt.verify(token, process.env.SECRET_KEY, async (error, payload) => {
