@@ -14,7 +14,7 @@ module.exports = {
             const { error } = accountValidate.validate(req.body);
             if (error) {
                 return jsonResponse({ req, res })
-                    .status(error.status || 500)
+                    .status(200)
                     .json({ message: error.details[0].message || "Internal Server Error" });
             }
             let username = req.body.username;
@@ -66,7 +66,7 @@ module.exports = {
                                         req,
                                         res,
                                     }).json({
-                                        statusCode: true,
+                                        status: true,
                                         message: "Login successfully!",
                                         data: {
                                             payload: {
@@ -93,6 +93,7 @@ module.exports = {
                 });
             }
         } catch (error) {
+            console.log(error);
             return next(error);
         }
     },
@@ -105,15 +106,17 @@ module.exports = {
             const { error } = accountValidate.validate(req.body);
             if (error) {
                 return jsonResponse({ req, res })
-                    .status(error.status || 500)
+                    .status(200)
                     .json({ message: error.details[0].message || "Internal Server Error" });
             }
             let username = req.body.username;
             let password = req.body.password;
-            let accountQuery = await accountModel.findOne({ username });
+            let accountQuery = await accountModel.findOne({ username: username.toUpperCase() });
+
             if (accountQuery) {
                 bcrypt.compare(password, accountQuery.password, async (err, isValid) => {
                     if (err) return next(err);
+
                     if (isValid) {
                         axios
                             .get(`${process.env.ACCOUNT_SERVICE}/user/get/${username}`)
@@ -153,13 +156,13 @@ module.exports = {
                                         req,
                                         res,
                                     }).json({
-                                        statusCode: true,
+                                        status: true,
                                         message: "Login successfully!",
                                         data: {
                                             payload: {
                                                 username: accountRes.data.data.id_user,
                                                 fullName: accountRes.data.data.fullName,
-                                                role: "student",
+                                                role: accountRes.data.data.role,
                                             },
                                             token,
                                             refreshToken,
@@ -221,7 +224,7 @@ module.exports = {
             const { error } = accountValidate.validate(req.body);
             if (error) {
                 return jsonResponse({ req, res })
-                    .status(error.status || 500)
+                    .status(200)
                     .json({ message: error.details[0].message || "Internal Server Error" });
             }
             const purePassword = req.body.password;
@@ -251,7 +254,7 @@ module.exports = {
             const { error } = changePassSchema.validate(req.body);
             if (error) {
                 return jsonResponse({ req, res })
-                    .status(error.status || 500)
+                    .status(200)
                     .json({ message: error.details[0].message || "Internal Server Error" });
             }
             const { username, oldPassword, newPassword } = req.body;

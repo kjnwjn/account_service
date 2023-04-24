@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/account/user-login": {
+    "/user-login": {
       "post": {
         "tags": [
           "Account"
@@ -37,7 +37,7 @@
         "responses": {}
       }
     },
-    "/account/student-login": {
+    "/student-login": {
       "post": {
         "tags": [
           "Account"
@@ -63,7 +63,7 @@
         "responses": {}
       }
     },
-    "/account/new-account": {
+    "/new-account": {
       "post": {
         "tags": [
           "Account"
@@ -92,7 +92,7 @@
         "responses": {}
       }
     },
-    "/account/change-pass": {
+    "/change-pass": {
       "post": {
         "tags": [
           "Account"
@@ -121,7 +121,7 @@
         "responses": {}
       }
     },
-    "/account/refresh-token": {
+    "/refresh-token": {
       "get": {
         "tags": [
           "Account"
