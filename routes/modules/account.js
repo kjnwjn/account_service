@@ -25,7 +25,7 @@ module.exports = {
                     if (err) return next(err);
                     if (isValid) {
                         axios
-                            .get(`${process.env.ACCOUNT_SERVICE}/student/get/${username}`)
+                            .get(`${process.env.CLIENT_SERVICE}/student/get/${username}`)
                             .then(async (accountRes) => {
                                 if (accountRes.data.status) {
                                     let token = jwt.sign(
@@ -58,10 +58,7 @@ module.exports = {
                                     );
                                     res.cookie("refreshToken", refreshToken);
                                     res.cookie("token", token);
-                                    await accountModel.findOneAndUpdate(
-                                        { username },
-                                        { access_token: token, refresh_token: refreshToken }
-                                    );
+                                    await accountModel.findOneAndUpdate({ username }, { access_token: token, refresh_token: refreshToken });
                                     return jsonResponse({
                                         req,
                                         res,
@@ -119,7 +116,7 @@ module.exports = {
 
                     if (isValid) {
                         axios
-                            .get(`${process.env.ACCOUNT_SERVICE}/user/get/${username}`)
+                            .get(`${process.env.CLIENT_SERVICE}/user/get/${username}`)
                             .then(async (accountRes) => {
                                 if (accountRes.data.status) {
                                     let token = jwt.sign(
@@ -148,10 +145,7 @@ module.exports = {
                                     );
                                     res.cookie("refreshToken", refreshToken);
                                     res.cookie("token", token);
-                                    await accountModel.findOneAndUpdate(
-                                        { username },
-                                        { access_token: token, refresh_token: refreshToken }
-                                    );
+                                    await accountModel.findOneAndUpdate({ username }, { access_token: token, refresh_token: refreshToken });
                                     return jsonResponse({
                                         req,
                                         res,
