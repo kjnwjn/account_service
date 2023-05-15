@@ -5,7 +5,7 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "localhost:3002/api/security-service/v1",
+  "host": "localhost:3001/api/security-service/v1",
   "basePath": "/",
   "schemes": [
     "http"
